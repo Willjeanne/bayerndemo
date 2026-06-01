@@ -1,0 +1,1 @@
+# Bayern Demo - product images
