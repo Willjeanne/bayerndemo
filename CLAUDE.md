@@ -108,10 +108,14 @@ bayerndemo/
 - [x] Push sur GitHub
 
 ### 🔄 Phase 2 — CMS Headless (en cours)
-- [ ] Connecter VTEX CLI au compte `bayerndemo`
-- [ ] `yarn cms-sync` — pousser les schémas de sections vers le CMS Headless
-- [ ] Configurer les pages dans le CMS : Home, PLP, PDP
-- [ ] Créer le contenu initial (sections homepage Bayern)
+- [x] Installer `vtex.webops` sur le compte (`vtex install vtex.webops`)
+- [x] Installer `vtex.admin-content-platform-ui` (`vtex install vtex.admin-content-platform-ui`)
+- [x] Installer le plugin CLI content (`vtex plugins install @vtex/cli-plugin-content`)
+- [x] Migrer les schémas CMS au format `.jsonc` (`cms/faststore/components/cms_component__*.jsonc`)
+- [ ] **Attendre que le premier build WebOps réussisse** — débloque l'accès au schema registry `vtex.faststore4`
+- [ ] Générer le schema : `vtex content generate-schema -o cms/faststore/schema.json -b vtex.faststore4`
+- [ ] Uploader le schema : `vtex content upload-schema cms/faststore/schema.json`
+- [ ] Configurer le contenu des pages dans Admin → Storefront → Content
 
 ### 📋 Phase 3 — Contenu & Pages
 - [ ] Homepage : HeroBanner avec visuels Bayern, LookbookGrid (catégories jersey), FullWidthShelf, CountdownBanner
@@ -164,10 +168,23 @@ Raison : SlideOver (`position: fixed`) se cachait derrière la navbar sticky.
 ```bash
 yarn dev              # Dev server localhost:3000
 yarn build            # Build prod
-yarn cms-sync         # Sync schémas CMS vers VTEX Headless CMS
 yarn generate         # Régénérer types GraphQL après modif de fragments
 vtex login bayerndemo # Connexion VTEX CLI au compte
+
+# CMS Headless — workflow correct (NE PAS utiliser yarn cms-sync, c'est legacy)
+vtex content generate-schema -o cms/faststore/schema.json -b vtex.faststore4
+vtex content upload-schema cms/faststore/schema.json
 ```
+
+## Prérequis CMS — à installer une seule fois sur le compte
+
+```bash
+vtex install vtex.webops                          # App WebOps
+vtex install vtex.admin-content-platform-ui       # App CMS admin
+vtex plugins install @vtex/cli-plugin-content     # Plugin CLI pour vtex content
+```
+
+⚠️ `vtex content generate-schema -b vtex.faststore4` requiert que le premier build WebOps ait réussi (débloque l'accès au schema registry).
 
 ---
 

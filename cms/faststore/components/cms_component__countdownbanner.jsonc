@@ -1,0 +1,42 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "CountdownBanner",
+  "$componentTitle": "Countdown Banner",
+  "title": "Countdown Banner",
+  "description": "Full-width promotional bar with live countdown timer — disappears when expired",
+  "type": "object",
+  "required": ["message", "endDate"],
+  "properties": {
+    "message": {
+      "title": "Promotional message",
+      "type": "string",
+      "default": "Limited offer"
+    },
+    "endDate": {
+      "title": "End date (ISO format: YYYY-MM-DDTHH:MM:SS)",
+      "description": "Example: 2026-12-31T23:59:59",
+      "type": "string",
+      "default": "2026-12-31T23:59:59"
+    },
+    "ctaLabel": {
+      "title": "CTA button text (optional)",
+      "type": "string",
+      "default": ""
+    },
+    "ctaUrl": {
+      "title": "CTA button URL (optional)",
+      "type": "string",
+      "default": ""
+    },
+    "backgroundColor": {
+      "title": "Background color",
+      "type": "string",
+      "default": "#DC052D"
+    },
+    "textColor": {
+      "title": "Text color",
+      "type": "string",
+      "default": "#FFFFFF"
+    }
+  }
+}

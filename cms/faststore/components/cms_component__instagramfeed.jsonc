@@ -1,0 +1,85 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "InstagramFeed",
+  "$componentTitle": "Instagram Feed",
+  "title": "Instagram Feed",
+  "description": "GET INSPIRED section — editorial image grid with Instagram links",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "title": {
+      "title": "Section title",
+      "type": "string",
+      "default": "Get Inspired"
+    },
+    "subtitle": {
+      "title": "Subtitle",
+      "type": "string",
+      "default": ""
+    },
+    "image1": {
+      "title": "Image 1 (required)",
+      "type": "object",
+      "properties": {
+        "image": {
+          "title": "Image",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": ["png", "jpg", "jpeg", "gif", "svg", "webp"]
+            }
+          }
+        },
+        "imageAlt": { "title": "Alt text", "type": "string", "default": "" },
+        "instagramUrl": { "title": "Instagram URL", "type": "string", "default": "" }
+      }
+    },
+    "image2": {
+      "title": "Image 2 (required)",
+      "type": "object",
+      "properties": {
+        "image": { "title": "Image", "type": "string", "widget": { "ui:widget": "media-gallery", "restrictMediaTypes": { "video": true, "image": ["png", "jpg", "jpeg", "gif", "svg", "webp"] } } },
+        "imageAlt": { "title": "Alt text", "type": "string", "default": "" },
+        "instagramUrl": { "title": "Instagram URL", "type": "string", "default": "" }
+      }
+    },
+    "image3": {
+      "title": "Image 3 (required)",
+      "type": "object",
+      "properties": {
+        "image": { "title": "Image", "type": "string", "widget": { "ui:widget": "media-gallery", "restrictMediaTypes": { "video": true, "image": ["png", "jpg", "jpeg", "gif", "svg", "webp"] } } },
+        "imageAlt": { "title": "Alt text", "type": "string", "default": "" },
+        "instagramUrl": { "title": "Instagram URL", "type": "string", "default": "" }
+      }
+    },
+    "image4": {
+      "title": "Image 4 (optional)",
+      "type": "object",
+      "properties": {
+        "image": { "title": "Image", "type": "string", "widget": { "ui:widget": "media-gallery", "restrictMediaTypes": { "video": true, "image": ["png", "jpg", "jpeg", "gif", "svg", "webp"] } } },
+        "imageAlt": { "title": "Alt text", "type": "string", "default": "" },
+        "instagramUrl": { "title": "Instagram URL", "type": "string", "default": "" }
+      }
+    },
+    "image5": {
+      "title": "Image 5 (optional)",
+      "type": "object",
+      "properties": {
+        "image": { "title": "Image", "type": "string", "widget": { "ui:widget": "media-gallery", "restrictMediaTypes": { "video": true, "image": ["png", "jpg", "jpeg", "gif", "svg", "webp"] } } },
+        "imageAlt": { "title": "Alt text", "type": "string", "default": "" },
+        "instagramUrl": { "title": "Instagram URL", "type": "string", "default": "" }
+      }
+    },
+    "image6": {
+      "title": "Image 6 (optional)",
+      "type": "object",
+      "properties": {
+        "image": { "title": "Image", "type": "string", "widget": { "ui:widget": "media-gallery", "restrictMediaTypes": { "video": true, "image": ["png", "jpg", "jpeg", "gif", "svg", "webp"] } } },
+        "imageAlt": { "title": "Alt text", "type": "string", "default": "" },
+        "instagramUrl": { "title": "Instagram URL", "type": "string", "default": "" }
+      }
+    }
+  }
+}

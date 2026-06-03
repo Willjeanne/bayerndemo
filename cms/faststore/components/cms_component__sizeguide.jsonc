@@ -1,0 +1,25 @@
+{
+  "$extends": ["#/$defs/base-component"],
+  "$componentKey": "SizeGuide",
+  "$componentTitle": "Size Guide",
+  "title": "Size Guide",
+  "description": "Size guide modal injected on the product page — configure the size chart rows",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "rows": {
+      "title": "Size chart rows",
+      "type": "array",
+      "items": {
+        "title": "Row",
+        "type": "object",
+        "properties": {
+          "size": { "title": "Size (e.g. S, M, L, XL)", "type": "string" },
+          "chest": { "title": "Chest (cm)", "type": "string" },
+          "waist": { "title": "Waist (cm)", "type": "string" },
+          "hips": { "title": "Hips (cm)", "type": "string" }
+        }
+      }
+    }
+  }
+}
