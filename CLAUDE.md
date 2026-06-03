@@ -1,137 +1,196 @@
-# CLAUDE.md
+# CLAUDE.md — FC Bayern München FastStore Demo
 
-> Ce fichier est lu automatiquement par Claude Code (terminal et desktop) et par Cursor.
-> Il fournit le contexte permanent du projet.
+> Fichier de contexte permanent — mis à jour après chaque chantier significatif.
+> Utilisé par Claude Code pour retrouver le contexte sans avoir besoin de re-expliquer.
 
-## Qui je suis et ce que je fais
+---
 
-Je suis **Solution Engineer chez VTEX** (william.jeanne@vtex.com).
-Je comprends le code mais je ne suis pas développeur — je vais te demander d'exécuter, et de m'expliquer ce que tu fais en termes simples avant chaque modification importante.
+## Identité du projet
 
-## Contexte de ce projet
+| Clé | Valeur |
+|-----|--------|
+| **Projet** | Demo storefront FC Bayern München sur VTEX FastStore |
+| **Compte VTEX** | `bayerndemo` |
+| **GitHub** | https://github.com/Willjeanne/bayerndemo |
+| **Owner** | William Jeanne — Solution Engineer VTEX (william.jeanne@vtex.com) |
+| **Objectif** | Demo commerciale pour FC Bayern Munich — showcase des capacités VTEX Headless |
+| **Public** | Équipe Bayern Munich + prospects internes VTEX |
 
-Ce repo est le **FastStore SE Starter Kit** — un template réutilisable pour monter un POC ou une démo e-commerce VTEX en moins d'une journée.
-
-Workflow cible : clone → configurer `NEXT_PUBLIC_STORE_ID` → adapter les tokens du thème → `yarn cms-sync` → déployer via WebOps.
-
-Il est utilisé exclusivement par les Solution Engineers VTEX pour des démos internes. Pas de end-customers, pas de risque transactionnel.
+---
 
 ## Stack technique
 
 - **Storefront** : VTEX FastStore (Next.js 13.5 + React 18 + TypeScript 5.3)
-- **CLI** : `@faststore/cli` 3.99.2
-- **Theming** : SCSS + design tokens FastStore (variables `--fs-*`), thème `se-starter`
-- **Customisation** : Overrides API FastStore (`src/components/overrides/`, `src/components/sections/`)
-- **CMS** : Headless CMS VTEX (sync via `yarn cms-sync`)
-- **Hébergement** : FastStore WebOps (déploiement auto sur push `main`)
-- **Config store** : `discovery.config.js` — storeId via `NEXT_PUBLIC_STORE_ID` (env var)
+- **CLI** : `@faststore/cli` 3.99.6
+- **Thème** : `se-starter` (`src/themes/se-starter.scss`) — tokens `--fs-*`
+- **CMS** : VTEX Headless CMS (sync via `yarn cms-sync`)
+- **Déploiement** : FastStore WebOps (auto sur push `main`)
+- **Config** : `discovery.config.js` + `.env.local` (`NEXT_PUBLIC_STORE_ID=bayerndemo`)
+- **Locale** : `de-DE` / EUR / DEU
 
-## Pour démarrer sur un nouveau compte démo
+---
 
-1. Créer `.env.local` avec `NEXT_PUBLIC_STORE_ID=ton-account-name`
-2. Mettre à jour `session.currency` / `session.locale` dans `discovery.config.js` si besoin
-3. Adapter les tokens dans `src/themes/se-starter.scss`
-4. `yarn cms-sync` (VTEX CLI connecté au compte)
-5. `yarn dev` → tester sur localhost:3000
-6. Push sur `main` → WebOps déploie
+## Design System FC Bayern
 
-> Voir `SETUP.md` pour le guide complet étape par étape.
+| Token | Valeur | Description |
+|-------|--------|-------------|
+| `--fs-color-main-0` | `#FFFFFF` | Blanc pur |
+| `--fs-color-main-1` | `#F4F5F6` | Surface claire |
+| `--fs-color-main-2` | `#D2D5DA` | Bordures |
+| `--fs-color-main-3` | `#5B616E` | Texte secondaire |
+| `--fs-color-main-4` | `#0E1116` | Texte principal (quasi-noir) |
+| `--fs-color-accent-0` | `#DC052D` | **Bayern Red** — CTA, navbar, badges sale |
+| `--fs-color-accent-1` | `#0066B2` | Bayern Blue |
+| `--fs-color-accent-2` | `#10213B` | Deep Navy |
+| `--fs-color-accent-3` | `#C8A04A` | Meister Gold |
+| `--fs-text-face-body` | Hanken Grotesk | Corps de texte |
+| `--fs-text-face-display` | Archivo | Titres — bold/900 |
+| `--fs-border-radius` | `0px` | Sharp — identité sportive |
 
-## Pattern checkout adopté
+**Navbar** : fond rouge `#DC052D`, texte blanc. Promo bar : Deep Navy `#10213B`.
 
-Le tunnel checkout passe par `YOUR_STORE_ID.myvtex.com` (pas par `secure.vtexfaststore.com`).
-Dans `discovery.config.js` : `secureSubdomain` et `checkoutUrl` sont toujours sur `.myvtex.com`.
+---
 
-**Compromis assumé** : l'URL change pendant le tunnel (`.vtex.app` → `.myvtex.com`). VTEX peut demander un re-login admin → OK pour la démo.
+## Structure des fichiers clés
 
-Pattern emprunté au compte de référence `demomarkets`. Ne pas remettre `secure.vtexfaststore.com` sans avoir enregistré le compte dans l'infra FastStore secure côté VTEX.
+```
+bayerndemo/
+├── discovery.config.js          # Config store (storeId, locale, rewrites)
+├── .env.local                   # NEXT_PUBLIC_STORE_ID=bayerndemo (gitignored)
+├── src/
+│   ├── themes/
+│   │   └── se-starter.scss      # ← DESIGN SYSTEM BAYERN (tokens, navbar, overrides)
+│   ├── fonts/
+│   │   └── WebFonts.tsx         # Google Fonts : Hanken Grotesk + Archivo
+│   ├── components/
+│   │   ├── index.tsx            # Enregistrement de toutes les sections custom
+│   │   ├── sections/            # Sections CMS custom
+│   │   │   ├── HeroBanner/
+│   │   │   ├── LookbookGrid/
+│   │   │   ├── FullWidthShelf/
+│   │   │   ├── InstagramFeed/
+│   │   │   ├── SizeGuide/
+│   │   │   └── CountdownBanner/
+│   │   └── overrides/           # FastStore core component overrides
+│   │       ├── ProductDetails.tsx
+│   │       ├── ProductGallery.tsx
+│   │       ├── ProductShelf.tsx
+│   │       └── CrossSellingShelf.tsx
+└── cms/
+    └── faststore/
+        └── sections.json        # Schémas CMS pour toutes les sections custom
+```
 
-## Composants custom
+---
 
-| Composant | Chemin | Description | CMS-pilotable |
-|-----------|--------|-------------|---------------|
-| `HeroBanner` | `src/components/sections/HeroBanner/` | Image 85vh pleine largeur, titre/sous-titre/CTA overlay, 9 positions, overlay réglable, image mobile optionnelle | ✅ |
-| `LookbookGrid` | `src/components/sections/LookbookGrid/` | 3 cellules éditoriales côte à côte, image + titre + CTA. Couvre aussi le besoin ShopByCategory (mettre des URLs catégorie dans `linkUrl`) | ✅ |
-| `FullWidthShelf` | `src/components/sections/FullWidthShelf/` | Carousel produits pleine largeur, hover image-swap, flèches nav, données via Catalog Portal API | ✅ |
-| `InstagramFeed` | `src/components/sections/InstagramFeed/` | Grille "GET INSPIRED" — 3-6 images carrées, icône Instagram overlay au hover | ✅ |
-| `SizeGuide` | `src/components/sections/SizeGuide/` | Bouton "Size Guide" → modal avec tableau de tailles. Injecté sur la PDP via override ProductDetails | ✅ |
-| `CountdownBanner` | `src/components/sections/CountdownBanner/` | Bannière flash sale pleine largeur avec timer live (JJ HH:MM:SS), disparaît à expiration | ✅ |
+## Composants custom disponibles
 
-**FullWidthShelf — détails techniques** :
-- Prop CMS : `categoryId` (integer) — trouver l'ID dans Admin > Catalog > Categories (URL de la page)
-- Utilise Catalog Portal API (`/api/catalog_system/pub/products/search`) — fonctionne sur tous les comptes sans IS indexée
-- Le proxy Next.js (`rewrites` dans `discovery.config.js`) est indispensable en local pour le CORS — redémarrer `yarn dev` si 404
-- Retourne `null` silencieusement si aucun produit → vérifier l'onglet Network si le composant n'apparaît pas
+| Composant | Description | Configurable CMS |
+|-----------|-------------|-----------------|
+| `HeroBanner` | Hero full-width, image desktop/mobile, titre/sous-titre/CTA, 9 positions, overlay opacity | ✅ |
+| `LookbookGrid` | 3 cellules éditoriales côte à côte (aussi utilisable en ShopByCategory) | ✅ |
+| `FullWidthShelf` | Carousel produits via Catalog API, hover image-swap, flèches nav | ✅ |
+| `InstagramFeed` | Grille "GET INSPIRED" — 3-6 images, lien Instagram au hover | ✅ |
+| `SizeGuide` | Modal tableau de tailles, injecté PDP via override ProductDetails | ✅ |
+| `CountdownBanner` | Barre flash sale avec timer live, disparaît à expiration | ✅ |
 
-## Overrides
+**FullWidthShelf** : prop CMS `categoryId` (integer, trouvable dans Admin > Catalog > Categories).
 
-| Override | Fichier | Ce qu'il fait |
-|----------|---------|---------------|
-| `ProductDetails` | `src/components/overrides/ProductDetails.tsx` | Injecte `<SizeGuide />` au-dessus du simulateur de livraison (via `__experimentalShippingSimulation`) |
-| `ProductShelf` | `src/components/overrides/ProductShelf.tsx` | `aspectRatio: 0.75`, `bordered: false` sur les ProductCards |
-| `CrossSellingShelf` | `src/components/overrides/CrossSellingShelf.tsx` | Idem ProductShelf |
+---
+
+## Plan d'évolution du projet
+
+### ✅ Phase 1 — Foundation (terminée 2026-06-03)
+- [x] Copie du SE starter FastStore 3.99.6 comme base
+- [x] Design system FC Bayern implémenté (couleurs, fonts, border-radius, navbar rouge)
+- [x] `discovery.config.js` configuré pour `bayerndemo` (de-DE, EUR, DEU)
+- [x] Sections CMS traduites en anglais
+- [x] Push sur GitHub
+
+### 🔄 Phase 2 — CMS Headless (en cours)
+- [ ] Connecter VTEX CLI au compte `bayerndemo`
+- [ ] `yarn cms-sync` — pousser les schémas de sections vers le CMS Headless
+- [ ] Configurer les pages dans le CMS : Home, PLP, PDP
+- [ ] Créer le contenu initial (sections homepage Bayern)
+
+### 📋 Phase 3 — Contenu & Pages
+- [ ] Homepage : HeroBanner avec visuels Bayern, LookbookGrid (catégories jersey), FullWidthShelf, CountdownBanner
+- [ ] PLP : personnalisation selon le catalogue Bayern
+- [ ] PDP : SizeGuide configuré pour les maillots Bayern
+- [ ] Page éditoriale : contenu club/équipe
+
+### 📋 Phase 4 — Nouveaux composants spécifiques Bayern
+- [ ] **MatchdayBanner** — bannière avec prochain match (date, adversaire, score live ou CTA billetterie)
+- [ ] **PlayerSpotlight** — section "joueur mis en avant" avec stats + lien boutique
+- [ ] **TrophyShelf** — timeline palmarès avec années et trophées (éditorial)
+- [ ] **ClubNewsGrid** — grille actualités du club (image + titre + lien)
+
+### 📋 Phase 5 — Déploiement
+- [ ] Configurer WebOps pour `bayerndemo`
+- [ ] Déploiement production
+- [ ] Tests Lighthouse
+- [ ] Validation finale
+
+---
 
 ## Décisions d'architecture
 
 | Date | Décision | Raison |
 |------|----------|--------|
-| 2026-05-08 | Pattern checkout via `.myvtex.com` | Seul pattern fonctionnel bout-en-bout sur comptes demo |
-| 2026-05-08 | FullWidthShelf via Catalog Portal API | IS pas toujours indexée sur un compte neuf → Catalog Portal API disponible immédiatement |
-| 2026-05-12 | FullWidthShelf prop `categoryId` (int) au lieu de `categorySlug` | Les IDs slug étaient hardcodés pour soliverdemo — `categoryId` est universel pour tous les catalogues |
-| 2026-05-12 | LookbookGrid couvre le besoin ShopByCategory | Évite la duplication — LookbookGrid accepte déjà des URLs de catégories dans `linkUrl` |
+| 2026-06-03 | Base sur SE starter FastStore 3.99.6 | Template éprouvé avec 6 sections custom prêtes |
+| 2026-06-03 | Navbar rouge pleine | Direction Claude Design — correspond au branding Bayern store (vs. blanc pour le site éditorial) |
+| 2026-06-03 | Hanken Grotesk + Archivo | Recommandation design system — géométrique/sport, cohérent avec wordmark Bayern |
+| 2026-06-03 | `border-radius: 0px` | Style sporty/carré — identique au site Bayern officiel |
+| 2026-06-03 | Catalog API (pas IS) | IS pas toujours indexée sur un compte neuf — Catalog Portal API disponible immédiatement |
+| 2026-06-03 | Checkout via `.myvtex.com` | Seul pattern fonctionnel bout-en-bout sur comptes demo |
 
-## Known workaround — CartSidebar z-index
+---
 
-Dans `src/themes/se-starter.scss` (hors `@layer theme`) :
+## Known workarounds
+
+**CartSidebar z-index** (dans `se-starter.scss`, hors `@layer theme`) :
 ```scss
 .section-cart-sidebar { position: relative; z-index: 500; }
 [data-fs-slide-over] { top: 0 !important; }
 ```
-Raison : le SlideOver (`position: fixed`) se cachait derrière la navbar sticky sur les PDPs. Sans ce fix, le mini-cart n'est pas visible.
+Raison : SlideOver (`position: fixed`) se cachait derrière la navbar sticky.
 
-## Règles de code
+**Breadcrumb margin-top** : `margin-top: 6rem !important` pour passer sous la navbar sticky.
 
-### Toujours
-- Sections custom dans `src/components/sections/`
-- Enregistrement dans `src/components/index.tsx`
-- Schéma CMS dans `cms/faststore/sections.json`
-- **CSS Modules** (`*.module.scss`) — jamais de couleurs/typo/spacing hardcodés
-- Tokens `--fs-*` pour toutes les valeurs visuelles
-- Code en **anglais** (le repo est partagé avec des collègues non-francophones)
-
-### Jamais
-- Ne pas modifier `node_modules/` ni `@faststore/core` directement
-- Ne pas hardcoder de couleurs ou URLs de compte VTEX — toujours via `STORE_ID` ou tokens
-- Ne pas override `__experimentalProductCard` ou `SearchInput` sans avertir (impact analytics IS)
-- Ne pas créer de composants en dehors de `src/components/`
-- Ne pas push directement sur `main` — toujours branche + PR + squash merge
-
-## Workflow attendu pour chaque tâche
-
-1. **Comprendre** : lire les fichiers concernés, expliquer en 2-3 phrases
-2. **Vérifier la doc** : utiliser le MCP `vtex-developer` si doute sur un pattern ou une API
-3. **Plan en 5 lignes** avant tout chantier long → attendre OK avant de coder
-4. **Implémenter** : modifications minimales nécessaires
-5. **Tester en local** : dire quoi vérifier sur `http://localhost:3000`
-6. **Expliquer** : résumer ce qui a changé et pourquoi
-7. **Mettre à jour CLAUDE.md** après chaque chantier significatif
+---
 
 ## Commandes utiles
 
-- `yarn dev` — Dev server (hot reload sur localhost:3000)
-- `yarn build` — Build de prod
-- `yarn cms-sync` — Sync des sections CMS Headless
-- `yarn generate` — Régénérer les types après modification de fragment GraphQL
+```bash
+yarn dev              # Dev server localhost:3000
+yarn build            # Build prod
+yarn cms-sync         # Sync schémas CMS vers VTEX Headless CMS
+yarn generate         # Régénérer types GraphQL après modif de fragments
+vtex login bayerndemo # Connexion VTEX CLI au compte
+```
 
-## Outils IA disponibles
+---
 
-- **VTEX Developer MCP** (`@vtex/developer-mcp`) — recherche live dans la doc et les API VTEX
-- **VTEX Skills** (tracks `faststore`, `headless`, `architecture`) — patterns et contraintes plateforme
+## Règles de développement
 
-## Style de communication
+### Toujours
+- Sections custom dans `src/components/sections/` — enregistrer dans `index.tsx` et `sections.json`
+- **CSS Modules** (`*.module.scss`) — tokens `--fs-*` pour toutes les valeurs visuelles
+- Code et commentaires en **anglais**
+- Mettre à jour `CLAUDE.md` après chaque chantier significatif (nouveaux composants, décisions)
 
-- Réponds en **français**
-- Code en **anglais**
-- Pas de jargon dev sans explication courte
-- Si hésitation entre 2 approches, exposer les options et proposer une recommandation
-- Si une commande peut casser quelque chose (push, deploy), demander confirmation avant
+### Jamais
+- Modifier `node_modules/` ni `@faststore/core` directement
+- Hardcoder des couleurs hors tokens `--fs-*`
+- Hardcoder des URLs VTEX — toujours via `STORE_ID` env var
+- Push direct sur `main` sans test local
+
+---
+
+## Workflow Claude Code
+
+1. **Lire ce fichier** pour retrouver le contexte
+2. **MCP `vtex-developer`** si doute sur pattern ou API VTEX
+3. **Plan en 5 lignes** avant tout chantier long — attendre OK
+4. **Mettre à jour ce fichier** après chaque chantier significatif
+5. Répondre en **français**, coder en **anglais**
