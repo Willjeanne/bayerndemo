@@ -1,0 +1,157 @@
+// ─── Link wrapper ─────────────────────────────────────────────────────────────
+
+.link {
+  display: block;
+  text-decoration: none;
+}
+
+// ─── Hero container ───────────────────────────────────────────────────────────
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  display: flex;
+  overflow: hidden;
+  background-color: var(--fs-color-main-2, #ededed);
+
+  @media (max-width: 768px) {
+    min-height: 60vh;
+  }
+
+  // ── Position variants ──
+  &[data-position="top-left"]      .content { align-self: flex-start; text-align: left;   }
+  &[data-position="top-center"]    .content { align-self: flex-start; text-align: center; margin-inline: auto; }
+  &[data-position="top-right"]     .content { align-self: flex-start; text-align: right;  margin-left: auto; }
+  &[data-position="center-left"]   .content { align-self: center;     text-align: left;   }
+  &[data-position="center-center"] .content { align-self: center;     text-align: center; margin-inline: auto; }
+  &[data-position="center-right"]  .content { align-self: center;     text-align: right;  margin-left: auto; }
+  &[data-position="bottom-left"]   .content { align-self: flex-end;   text-align: left;   }
+  &[data-position="bottom-center"] .content { align-self: flex-end;   text-align: center; margin-inline: auto; }
+  &[data-position="bottom-right"]  .content { align-self: flex-end;   text-align: right;  margin-left: auto; }
+
+  // ── CTA alignment follows text ──
+  &[data-position$="-left"]   .cta { align-self: flex-start; }
+  &[data-position$="-center"] .cta { align-self: center; }
+  &[data-position$="-right"]  .cta { align-self: flex-end; }
+
+  // ── Color: white ──
+  &[data-text-color="white"] {
+    .title, .subtitle { color: #fff; }
+    .cta {
+      color: #fff;
+      border-color: #fff;
+      background: transparent;
+    }
+  }
+
+  // ── Color: black ──
+  &[data-text-color="black"] {
+    .title, .subtitle { color: var(--fs-color-main-4, #161925); }
+    .cta {
+      color: var(--fs-color-main-4, #161925);
+      border-color: var(--fs-color-main-4, #161925);
+      background: transparent;
+    }
+  }
+
+  // ── Hover on CTA ──
+  .link:hover &[data-text-color="white"] .cta,
+  a:hover &[data-text-color="white"] .cta {
+    background: #fff;
+    color: var(--fs-color-main-4, #161925);
+  }
+
+  .link:hover &[data-text-color="black"] .cta,
+  a:hover &[data-text-color="black"] .cta {
+    background: var(--fs-color-main-4, #161925);
+    color: #fff;
+  }
+}
+
+// ─── Images ───────────────────────────────────────────────────────────────────
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s ease;
+
+  .link:hover & {
+    transform: scale(1.02);
+  }
+}
+
+.imageDesktop {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.imageMobile {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+// ─── Overlay ──────────────────────────────────────────────────────────────────
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, var(--hero-overlay-opacity, 0.3));
+  pointer-events: none;
+}
+
+// ─── Content ─────────────────────────────────────────────────────────────────
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 3rem 4rem;
+  max-width: 680px;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    max-width: 100%;
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 14px 40px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--fs-border-radius, 0);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

@@ -1,0 +1,192 @@
+// ═══════════════════════════════════════════════════════════════════════════
+// FC BAYERN MÜNCHEN — FastStore Design System
+// Based on the Bayern Munich brand identity
+// ─ Colors     : FC Bayern Red, Blue, Deep Navy, Meister Gold
+// ─ Typography : Hanken Grotesk (body) + Archivo (display)
+// ─ Tone       : Sporty / dynamic with editorial discipline
+// ═══════════════════════════════════════════════════════════════════════════
+
+@layer theme {
+    .theme {
+      // ----------------------------------------------------------
+      // PALETTE - Main (neutrals)
+      // ----------------------------------------------------------
+      --fs-color-main-0: #FFFFFF;
+      --fs-color-main-1: #F4F5F6;
+      --fs-color-main-2: #D2D5DA;
+      --fs-color-main-3: #5B616E;
+      --fs-color-main-4: #0E1116;
+
+      // ----------------------------------------------------------
+      // PALETTE - Accent (Bayern brand)
+      // ----------------------------------------------------------
+      --fs-color-accent-0: #DC052D; // FC Bayern Red
+      --fs-color-accent-1: #0066B2; // FC Bayern Blue
+      --fs-color-accent-2: #10213B; // Deep Navy
+      --fs-color-accent-3: #C8A04A; // Meister Gold
+      --fs-color-accent-4: #F4F5F6; // Light surface
+
+      // ----------------------------------------------------------
+      // HIERARCHY
+      // ----------------------------------------------------------
+      --fs-color-primary-bkg:              #DC052D;
+      --fs-color-primary-bkg-active:       #b00020;
+      --fs-color-primary-bkg-light:        #fde8ec;
+      --fs-color-primary-bkg-light-active: #f9c0ca;
+
+      // ----------------------------------------------------------
+      // ACTIONS (CTAs)
+      // ----------------------------------------------------------
+      --fs-color-action-bkg:        #DC052D;
+      --fs-color-action-bkg-hover:  #b00020;
+      --fs-color-action-bkg-active: #8c0018;
+
+      // ----------------------------------------------------------
+      // SITUATIONS
+      // ----------------------------------------------------------
+      --fs-color-success-bkg: #0066B2;
+      --fs-color-warning-bkg: #C8A04A;
+
+      // ----------------------------------------------------------
+      // COMPONENTS & STATES
+      // ----------------------------------------------------------
+      --fs-color-text-display: #0E1116;
+
+      // ----------------------------------------------------------
+      // TYPOGRAPHY
+      // ----------------------------------------------------------
+      --fs-text-face-body:    'Hanken Grotesk', -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
+      --fs-text-face-display: 'Archivo', -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
+
+      // ----------------------------------------------------------
+      // BORDERS & SHADOWS
+      // ----------------------------------------------------------
+      --fs-border-radius:    0px;
+      --fs-shadow:           none;
+      --fs-shadow-darker:    0 1px 4px rgba(14, 17, 22, 0.08);
+      --fs-shadow-hover:     0 2px 12px rgba(220, 5, 45, 0.12);
+
+      // ----------------------------------------------------------
+      // FS UI Components specifics
+      // ----------------------------------------------------------
+      --fs-logo-width: 8rem;
+
+      // PLP grid: 3 columns (editorial spacing)
+      [data-fs-product-grid] {
+        --fs-product-grid-columns-tablet:  3;
+        --fs-product-grid-columns-desktop: 3;
+      }
+
+      [data-fs-product-card] {
+        --fs-product-card-border-color:       var(--fs-color-main-2);
+        --fs-product-card-border-color-hover: var(--fs-color-accent-0);
+      }
+
+      // ----------------------------------------------------------
+      // PRODUCT CARD — Bayern sporty style
+      // ----------------------------------------------------------
+      [data-fs-product-card-image] {
+        overflow: hidden;
+
+        img {
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+          transition: transform 0.4s ease;
+        }
+      }
+
+      // Hover: subtle zoom on image
+      [data-fs-product-card]:hover [data-fs-product-card-image] img {
+        transform: scale(1.03);
+      }
+
+      // Title: uppercase sporty
+      [data-fs-product-card-title] {
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 0.7rem;
+        font-weight: 700;
+        font-family: var(--fs-text-face-display);
+      }
+
+      // ----------------------------------------------------------
+      // NAVBAR — Red header (Bayern brand)
+      // ----------------------------------------------------------
+      [data-fs-navbar] {
+        background-color: var(--fs-color-accent-0);
+        border-bottom: none;
+      }
+
+      [data-fs-navbar-header] {
+        background-color: var(--fs-color-accent-0);
+
+        a, span, button, [data-fs-button-wrapper], [data-fs-button-icon] {
+          color: #ffffff;
+        }
+
+        [data-fs-button-wrapper],
+        [data-fs-button-icon] {
+          color: #ffffff;
+        }
+      }
+
+      // ----------------------------------------------------------
+      // ICONS — Force white on red navbar
+      // ----------------------------------------------------------
+      [data-fs-navbar-header] {
+        [data-fs-button-wrapper],
+        [data-fs-button-icon] {
+          color: #ffffff;
+        }
+      }
+
+      [data-fs-cart-item] [data-fs-button-icon],
+      [data-fs-cart-sidebar] [data-fs-button-icon] {
+        color: var(--fs-color-text-display);
+      }
+
+      // ----------------------------------------------------------
+      // BREADCRUMB — Prevent overlap with the sticky navbar header
+      // ----------------------------------------------------------
+      section.section-breadcrumb,
+      [data-fs-breadcrumb] {
+        position: relative !important;
+        z-index: 100 !important;
+        margin-top: 6rem !important;
+        padding-top: 1rem !important;
+        background-color: var(--fs-color-main-0) !important;
+      }
+
+      // ----------------------------------------------------------
+      // BADGE — Sale in Bayern Red
+      // ----------------------------------------------------------
+      [data-fs-badge][data-fs-badge-variant="danger"] {
+        background-color: var(--fs-color-accent-0);
+      }
+
+      // ----------------------------------------------------------
+      // PROMO BAR — Deep navy strip above header
+      // ----------------------------------------------------------
+      [data-fs-alert] {
+        background-color: var(--fs-color-accent-2);
+        color: #ffffff;
+        font-family: var(--fs-text-face-body);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+    }
+  }
+
+// ----------------------------------------------------------
+// CART SIDEBAR — Global rules (outside .theme)
+// ----------------------------------------------------------
+.section-cart-sidebar {
+  position: relative;
+  z-index: 500;
+}
+
+[data-fs-slide-over] {
+  top: 0 !important;
+}

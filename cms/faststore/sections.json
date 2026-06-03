@@ -1,0 +1,420 @@
+[
+  {
+    "name": "HeroBanner",
+    "schema": {
+      "title": "Hero Banner",
+      "description": "Large full-width image with title, subtitle and CTA button overlay",
+      "type": "object",
+      "properties": {
+        "image": {
+          "title": "Image (desktop)",
+          "type": "string",
+          "default": ""
+        },
+        "imageAlt": {
+          "title": "Image description (alt)",
+          "type": "string",
+          "default": ""
+        },
+        "imageMobile": {
+          "title": "Mobile image (optional)",
+          "description": "If empty, the desktop image is used on mobile",
+          "type": "string",
+          "default": ""
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "default": ""
+        },
+        "subtitle": {
+          "title": "Subtitle (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "linkUrl": {
+          "title": "Link URL (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "linkLabel": {
+          "title": "CTA button text (optional)",
+          "type": "string",
+          "default": "Discover"
+        },
+        "textPosition": {
+          "title": "Text position",
+          "type": "string",
+          "enumNames": [
+            "Top left", "Top center", "Top right",
+            "Center left", "Center", "Center right",
+            "Bottom left", "Bottom center", "Bottom right"
+          ],
+          "enum": [
+            "top-left", "top-center", "top-right",
+            "center-left", "center-center", "center-right",
+            "bottom-left", "bottom-center", "bottom-right"
+          ],
+          "default": "bottom-left"
+        },
+        "textColor": {
+          "title": "Text color",
+          "type": "string",
+          "enumNames": ["White", "Black"],
+          "enum": ["white", "black"],
+          "default": "white"
+        },
+        "overlayOpacity": {
+          "title": "Dark overlay opacity (0-100)",
+          "type": "number",
+          "default": 30,
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  },
+  {
+    "name": "LookbookGrid",
+    "schema": {
+      "title": "Lookbook Grid",
+      "description": "3 editorial cells side by side with image, title and link",
+      "type": "object",
+      "required": ["cell1", "cell2", "cell3"],
+      "properties": {
+        "textPosition": {
+          "title": "Text position",
+          "type": "string",
+          "enumNames": [
+            "Top left", "Top center", "Top right",
+            "Center left", "Center", "Center right",
+            "Bottom left", "Bottom center", "Bottom right"
+          ],
+          "enum": [
+            "top-left", "top-center", "top-right",
+            "center-left", "center-center", "center-right",
+            "bottom-left", "bottom-center", "bottom-right"
+          ],
+          "default": "center-center"
+        },
+        "textColor": {
+          "title": "Text color",
+          "type": "string",
+          "enumNames": ["White", "Black"],
+          "enum": ["white", "black"],
+          "default": "white"
+        },
+        "cell1": {
+          "title": "Cell 1",
+          "type": "object",
+          "required": ["image", "imageAlt", "title", "linkUrl", "linkLabel"],
+          "properties": {
+            "image": {
+              "title": "Image URL",
+              "type": "string",
+              "default": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&h=1067&fit=crop"
+            },
+            "imageAlt": {
+              "title": "Image description (alt)",
+              "type": "string",
+              "default": "New Women's Collection"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": "New Collection"
+            },
+            "subtitle": {
+              "title": "Subtitle (optional)",
+              "type": "string",
+              "default": "Spring — Summer 2025"
+            },
+            "linkUrl": {
+              "title": "Link URL",
+              "type": "string",
+              "default": "/outillage"
+            },
+            "linkLabel": {
+              "title": "CTA button text",
+              "type": "string",
+              "default": "Discover"
+            }
+          }
+        },
+        "cell2": {
+          "title": "Cell 2",
+          "type": "object",
+          "required": ["image", "imageAlt", "title", "linkUrl", "linkLabel"],
+          "properties": {
+            "image": {
+              "title": "Image URL",
+              "type": "string",
+              "default": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&h=1067&fit=crop"
+            },
+            "imageAlt": {
+              "title": "Image description (alt)",
+              "type": "string",
+              "default": "Winter Trends"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": "Winter Trends"
+            },
+            "subtitle": {
+              "title": "Subtitle (optional)",
+              "type": "string",
+              "default": "Editorial selection"
+            },
+            "linkUrl": {
+              "title": "Link URL",
+              "type": "string",
+              "default": "/outillage"
+            },
+            "linkLabel": {
+              "title": "CTA button text",
+              "type": "string",
+              "default": "Explore"
+            }
+          }
+        },
+        "cell3": {
+          "title": "Cell 3",
+          "type": "object",
+          "required": ["image", "imageAlt", "title", "linkUrl", "linkLabel"],
+          "properties": {
+            "image": {
+              "title": "Image URL",
+              "type": "string",
+              "default": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=1067&fit=crop"
+            },
+            "imageAlt": {
+              "title": "Image description (alt)",
+              "type": "string",
+              "default": "New Arrivals"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": "New Arrivals"
+            },
+            "subtitle": {
+              "title": "Subtitle (optional)",
+              "type": "string"
+            },
+            "linkUrl": {
+              "title": "Link URL",
+              "type": "string",
+              "default": "/outillage"
+            },
+            "linkLabel": {
+              "title": "CTA button text",
+              "type": "string",
+              "default": "View all"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "FullWidthShelf",
+    "schema": {
+      "title": "Full Width Shelf",
+      "description": "Full-width product carousel with image swap on hover",
+      "type": "object",
+      "properties": {
+        "title": {
+          "title": "Section title (optional)",
+          "type": "string",
+          "default": ""
+        },
+        "categorySlug": {
+          "title": "Category Slug",
+          "description": "Exact category name as it appears in VTEX Admin (e.g. Clothes, Accessories, Bags, Pants & Skirts). Case-insensitive.",
+          "type": "string",
+          "default": ""
+        },
+        "count": {
+          "title": "Number of products to display",
+          "type": "number",
+          "default": 8,
+          "enum": [4, 8, 12],
+          "enumNames": ["4 products", "8 products", "12 products"]
+        }
+      }
+    }
+  },
+  {
+    "name": "InstagramFeed",
+    "schema": {
+      "title": "Instagram Feed",
+      "description": "GET INSPIRED section — editorial Instagram image grid",
+      "type": "object",
+      "properties": {
+        "title": {
+          "title": "Section title",
+          "type": "string",
+          "default": "GET INSPIRED"
+        },
+        "subtitle": {
+          "title": "Subtitle",
+          "type": "string",
+          "default": "Follow us on Instagram"
+        },
+        "image1": {
+          "title": "Image 1 (required)",
+          "type": "object",
+          "properties": {
+            "image": { "title": "Image URL", "type": "string", "default": "" },
+            "imageAlt": { "title": "Description (alt)", "type": "string", "default": "" },
+            "instagramUrl": { "title": "Instagram link", "type": "string", "default": "https://www.instagram.com" }
+          }
+        },
+        "image2": {
+          "title": "Image 2 (required)",
+          "type": "object",
+          "properties": {
+            "image": { "title": "Image URL", "type": "string", "default": "" },
+            "imageAlt": { "title": "Description (alt)", "type": "string", "default": "" },
+            "instagramUrl": { "title": "Instagram link", "type": "string", "default": "https://www.instagram.com" }
+          }
+        },
+        "image3": {
+          "title": "Image 3 (required)",
+          "type": "object",
+          "properties": {
+            "image": { "title": "Image URL", "type": "string", "default": "" },
+            "imageAlt": { "title": "Description (alt)", "type": "string", "default": "" },
+            "instagramUrl": { "title": "Instagram link", "type": "string", "default": "https://www.instagram.com" }
+          }
+        },
+        "image4": {
+          "title": "Image 4 (optional)",
+          "type": "object",
+          "properties": {
+            "image": { "title": "Image URL", "type": "string", "default": "" },
+            "imageAlt": { "title": "Description (alt)", "type": "string", "default": "" },
+            "instagramUrl": { "title": "Instagram link", "type": "string", "default": "https://www.instagram.com" }
+          }
+        },
+        "image5": {
+          "title": "Image 5 (optional)",
+          "type": "object",
+          "properties": {
+            "image": { "title": "Image URL", "type": "string", "default": "" },
+            "imageAlt": { "title": "Description (alt)", "type": "string", "default": "" },
+            "instagramUrl": { "title": "Instagram link", "type": "string", "default": "https://www.instagram.com" }
+          }
+        },
+        "image6": {
+          "title": "Image 6 (optional)",
+          "type": "object",
+          "properties": {
+            "image": { "title": "Image URL", "type": "string", "default": "" },
+            "imageAlt": { "title": "Description (alt)", "type": "string", "default": "" },
+            "instagramUrl": { "title": "Instagram link", "type": "string", "default": "https://www.instagram.com" }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "SizeGuide",
+    "schema": {
+      "title": "Size Guide",
+      "description": "A 'Size Guide' link on the PDP that opens a modal with a size chart table",
+      "type": "object",
+      "properties": {
+        "buttonLabel": {
+          "title": "Button label",
+          "type": "string",
+          "default": "Size Guide"
+        },
+        "title": {
+          "title": "Modal title",
+          "type": "string",
+          "default": "Find Your Size"
+        },
+        "note": {
+          "title": "Footer note",
+          "type": "string",
+          "default": "All measurements are in centimetres (cm). If you are between sizes, we recommend sizing up."
+        },
+        "rows": {
+          "title": "Size rows",
+          "description": "One row per size. Leave empty to use the default XS–XXL mock data.",
+          "type": "array",
+          "items": {
+            "title": "Size row",
+            "type": "object",
+            "properties": {
+              "size":  { "title": "Size label (e.g. XS, S, M)", "type": "string" },
+              "chest": { "title": "Chest (cm)",                  "type": "string" },
+              "waist": { "title": "Waist (cm)",                  "type": "string" },
+              "hips":  { "title": "Hips (cm)",                   "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "CountdownBanner",
+    "schema": {
+      "title": "Countdown Banner",
+      "description": "Full-width promotional banner with live countdown timer",
+      "type": "object",
+      "properties": {
+        "message": {
+          "title": "Message",
+          "type": "string",
+          "default": "Flash Sale — Limited time offer"
+        },
+        "endDate": {
+          "title": "End date & time (ISO format)",
+          "description": "e.g. 2026-06-01T23:59:00Z — banner disappears automatically when reached",
+          "type": "string",
+          "default": ""
+        },
+        "ctaLabel": {
+          "title": "CTA button label",
+          "type": "string",
+          "default": "Shop Now"
+        },
+        "ctaUrl": {
+          "title": "CTA button URL",
+          "type": "string",
+          "default": "/"
+        },
+        "ctaPosition": {
+          "title": "CTA position",
+          "type": "string",
+          "enum": ["left", "center", "right"],
+          "enumNames": ["Left", "Center", "Right"],
+          "default": "right"
+        },
+        "backgroundColor": {
+          "title": "Background color",
+          "description": "Any CSS color: #1a1a1a, red, rgb(0,0,0)…",
+          "type": "string",
+          "default": "#1a1a1a"
+        },
+        "textColor": {
+          "title": "Text color",
+          "description": "Any CSS color: #ffffff, white…",
+          "type": "string",
+          "default": "#ffffff"
+        },
+        "fontFamily": {
+          "title": "Font",
+          "description": "Body = main font · Display = editorial font · Monospace = technical font",
+          "type": "string",
+          "enum": ["body", "display", "mono"],
+          "enumNames": ["Body font", "Display font", "Monospace"],
+          "default": "body"
+        }
+      }
+    }
+  }
+]

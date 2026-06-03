@@ -1,0 +1,98 @@
+// ─── Section wrapper ──────────────────────────────────────────────────────────
+
+.instagramFeed {
+  width: 100%;
+  padding: var(--fs-spacing-7, 3rem) 0;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fs-spacing-1, 0.5rem);
+  margin-bottom: var(--fs-spacing-5, 2rem);
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-text-size-lead, 1.375rem);
+  font-weight: var(--fs-text-weight-bold, 700);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fs-color-main-4, #161925);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--fs-text-size-body, 0.875rem);
+  color: var(--fs-color-neutral-5, #74808b);
+  letter-spacing: 0.04em;
+}
+
+// ─── Grid ─────────────────────────────────────────────────────────────────────
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// ─── Item ─────────────────────────────────────────────────────────────────────
+
+.item {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+
+  &:focus-visible {
+    outline: 2px solid var(--fs-color-focus-ring, #005cff);
+    outline-offset: -2px;
+  }
+
+  &:hover .image {
+    transform: scale(1.05);
+  }
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+}
+
+// ─── Image ────────────────────────────────────────────────────────────────────
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+// ─── Overlay ──────────────────────────────────────────────────────────────────
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+// ─── Instagram icon ───────────────────────────────────────────────────────────
+
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #fff;
+}

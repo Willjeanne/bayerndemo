@@ -1,0 +1,171 @@
+// ─── Section ──────────────────────────────────────────────────────────────────
+
+.shelf {
+  width: 100%;
+  padding: var(--fs-spacing-7, 3rem) 0;
+  background-color: var(--fs-color-main-1, #f4f0eb);
+}
+
+// ─── Optional title ───────────────────────────────────────────────────────────
+
+.header {
+  text-align: center;
+  margin-bottom: var(--fs-spacing-5, 2rem);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-text-size-lead, 1.375rem);
+  font-weight: var(--fs-text-weight-bold, 700);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fs-color-main-4, #161925);
+}
+
+// ─── Carousel wrapper ─────────────────────────────────────────────────────────
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+// ─── Scrollable track ─────────────────────────────────────────────────────────
+
+.track {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+// ─── Card ─────────────────────────────────────────────────────────────────────
+
+.card {
+  flex: 0 0 25%;
+  min-width: 0;        /* prevent flex item from growing beyond 25% due to text content */
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    flex: 0 0 50%;
+  }
+
+  @media (max-width: 480px) {
+    flex: 0 0 100%;
+  }
+}
+
+// ─── Image ────────────────────────────────────────────────────────────────────
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--fs-color-main-2, #ededed);
+}
+
+// Top-level classes — CSS Modules scopes these correctly without nesting.
+// Nesting inside .imageWrapper generates compound selectors that lose their
+// module hash in production and fail to override FastStore global img resets.
+.imageMain,
+.imageHover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease;
+}
+
+.imageHover {
+  opacity: 0;
+}
+
+.card:hover .imageHover {
+  opacity: 1;
+}
+
+// ─── Info ─────────────────────────────────────────────────────────────────────
+
+.info {
+  min-width: 0;        /* allow info section to shrink within the card */
+  padding: var(--fs-spacing-3, 1rem) var(--fs-spacing-2, 0.75rem) var(--fs-spacing-2, 0.75rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-spacing-0, 0.25rem);
+}
+
+.name {
+  margin: 0;
+  font-size: var(--fs-text-size-base, 0.875rem);
+  font-weight: var(--fs-text-weight-bold, 700);
+  letter-spacing: 0.04em;
+  color: var(--fs-color-main-4, #161925);
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.variant {
+  margin: 0;
+  font-size: var(--fs-text-size-tiny, 0.75rem);
+  color: var(--fs-color-neutral-5, #74808b);
+  letter-spacing: 0.02em;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.price {
+  margin: 0;
+  font-size: var(--fs-text-size-base, 0.875rem);
+  font-weight: var(--fs-text-weight-regular, 400);
+  color: var(--fs-color-main-4, #161925);
+}
+
+// ─── Arrows ───────────────────────────────────────────────────────────────────
+
+.arrow {
+  position: absolute;
+  z-index: 2;
+  top: calc(37.5% - 1.5rem); // vertically centered on image (3/4 ratio → image takes 75% of card height)
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  &:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover:not(:disabled) {
+    transform: scale(1.08);
+  }
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--fs-color-main-4, #161925);
+  }
+}
+
+.arrowLeft {
+  left: var(--fs-spacing-3, 1rem);
+}
+
+.arrowRight {
+  right: var(--fs-spacing-3, 1rem);
+}

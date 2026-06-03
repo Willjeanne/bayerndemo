@@ -1,0 +1,159 @@
+// ─── Layout ───────────────────────────────────────────────────────────────────
+
+.lookbookGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Cell ─────────────────────────────────────────────────────────────────────
+
+.cell {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -4px;
+  }
+
+  &:hover .image {
+    transform: scale(1.03);
+  }
+
+  // ── Position variants: overlay flex alignment ──
+  &[data-position="top-left"]      .overlay { align-items: flex-start; justify-content: flex-start; }
+  &[data-position="top-center"]    .overlay { align-items: flex-start; justify-content: center; }
+  &[data-position="top-right"]     .overlay { align-items: flex-start; justify-content: flex-end; }
+  &[data-position="center-left"]   .overlay { align-items: center;     justify-content: flex-start; }
+  &[data-position="center-center"] .overlay { align-items: center;     justify-content: center; }
+  &[data-position="center-right"]  .overlay { align-items: center;     justify-content: flex-end; }
+  &[data-position="bottom-left"]   .overlay { align-items: flex-end;   justify-content: flex-start; }
+  &[data-position="bottom-center"] .overlay { align-items: flex-end;   justify-content: center; }
+  &[data-position="bottom-right"]  .overlay { align-items: flex-end;   justify-content: flex-end; }
+
+  // ── Text alignment follows horizontal position ──
+  &[data-position$="-left"]   .content { text-align: left; }
+  &[data-position$="-center"] .content { text-align: center; }
+  &[data-position$="-right"]  .content { text-align: right; }
+
+  // ── CTA self-alignment follows horizontal position ──
+  &[data-position$="-left"]   .cta { align-self: flex-start; }
+  &[data-position$="-center"] .cta { align-self: center; }
+  &[data-position$="-right"]  .cta { align-self: flex-end; }
+}
+
+// ─── Image ────────────────────────────────────────────────────────────────────
+
+.imageWrapper {
+  position: absolute;
+  inset: 0;
+  background-color: var(--fs-color-main-2, #ededed);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+// ─── Overlay & Content ────────────────────────────────────────────────────────
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  padding: 2rem;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.32) 100%);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+}
+
+// ─── CTA Button ───────────────────────────────────────────────────────────────
+
+.cta {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 12px 32px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--fs-border-radius, 0);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// ─── Color variants ───────────────────────────────────────────────────────────
+
+// White text
+.lookbookGrid[data-text-color="white"] {
+  .title,
+  .subtitle {
+    color: #fff;
+  }
+
+  .cta {
+    color: #fff;
+    border-color: #fff;
+    background: transparent;
+  }
+
+  .cell:hover .cta {
+    background: #fff;
+    color: var(--fs-color-main-4, #161925);
+  }
+}
+
+// Black text
+.lookbookGrid[data-text-color="black"] {
+  .overlay {
+    background: linear-gradient(to top, transparent 50%, rgba(255, 255, 255, 0.35) 100%);
+  }
+
+  .title,
+  .subtitle {
+    color: var(--fs-color-main-4, #161925);
+  }
+
+  .cta {
+    color: var(--fs-color-main-4, #161925);
+    border-color: var(--fs-color-main-4, #161925);
+    background: transparent;
+  }
+
+  .cell:hover .cta {
+    background: var(--fs-color-main-4, #161925);
+    color: #fff;
+  }
+}
